@@ -51,3 +51,45 @@ variable "db_instance_class" {
   type        = string
   default     = "db.t4g.micro"
 }
+
+variable "vpc_cidr" {
+  description = "CIDR block for the Project 1 VPC"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "availability_zone_1" {
+  description = "First Availability Zone for Project 1"
+  type        = string
+  default     = "us-east-1a"
+}
+
+variable "availability_zone_2" {
+  description = "Second Availability Zone for Project 1"
+  type        = string
+  default     = "us-east-1b"
+}
+
+variable "public_subnet_1_cidr" {
+  description = "CIDR block for Public Subnet 1 in us-east-1a"
+  type        = string
+  default     = "10.0.0.0/20"
+}
+
+variable "public_subnet_2_cidr" {
+  description = "CIDR block for Public Subnet 2 in us-east-1b"
+  type        = string
+  default     = "10.0.16.0/20"
+}
+
+variable "private_subnet_1_cidr" {
+  description = "CIDR block for Private Subnet 1 in us-east-1a"
+  type        = string
+  default     = "10.0.128.0/20"
+}
+
+variable "private_subnet_2_cidr" {
+  description = "CIDR block for Private Subnet 2 in us-east-1b"
+  type        = string
+  default     = "10.0.144.0/20"
+}
