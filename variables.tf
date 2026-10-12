@@ -93,3 +93,11 @@ variable "private_subnet_2_cidr" {
   type        = string
   default     = "10.0.144.0/20"
 }
+
+variable "db_password" {
+  description = "Master password for the Project 1 PostgreSQL database"
+  type        = string
+  sensitive   = true
+  ephemeral   = true
+}
+
