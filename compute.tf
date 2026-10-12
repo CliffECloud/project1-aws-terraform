@@ -1,0 +1,52 @@
+resource "aws_launch_template" "app" {
+  name_prefix   = "${var.project_name}-app-"
+  image_id      = "ami-0c49b7a098a9d021d"
+  instance_type = var.instance_type
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.ec2.name
+  }
+
+  vpc_security_group_ids = [
+    aws_security_group.web.id
+  ]
+
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "${var.project_name}-app-server"
+    }
+  }
+}
+
+resource "aws_autoscaling_group" "app" {
+  name = "${var.project_name}-app-asg"
+
+  min_size         = var.asg_min_size
+  desired_capacity = var.asg_desired_capacity
+  max_size         = var.asg_max_size
+
+  vpc_zone_identifier = [
+    aws_subnet.private_1.id,
+    aws_subnet.private_2.id
+  ]
+
+  target_group_arns = [
+    aws_lb_target_group.app.arn
+  ]
+
+  health_check_type         = "ELB"
+  health_check_grace_period = 300
+
+  launch_template {
+    id      = aws_launch_template.app.id
+    version = "$Latest"
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "${var.project_name}-app-server"
+    propagate_at_launch = true
+  }
+}
