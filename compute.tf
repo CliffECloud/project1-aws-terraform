@@ -1,6 +1,6 @@
 resource "aws_launch_template" "app" {
   name_prefix   = "${var.project_name}-app-"
-  image_id      = "ami-0c49b7a098a9d021d"
+  image_id      = var.ami_id
   instance_type = var.instance_type
 
   iam_instance_profile {

@@ -101,3 +101,10 @@ variable "db_password" {
   ephemeral   = true
 }
 
+variable "ami_id" {
+  description = "AMI ID for the Project 1 application servers"
+  type        = string
+  default     = "ami-0c49b7a098a9d021d"
+}
+
+
